@@ -1,3 +1,12 @@
+<?php
+    include_once("config.php");
+    include_once("header/navegadorInicio.php");
+
+    $query = "SELECT * FROM servicios 
+               WHERE estado != 'eliminado' AND nombre_servicio 
+               IN ('Ansiedad','Terapia familiar','Adicciones')";
+    $stmt = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html lan="es">
     <head>
@@ -9,58 +18,45 @@
         <link rel="stylesheet" href="css/estilos.css">
     </head>
     <body>
-        <header>
-            <div class="logo">
-                <img src="img/logo.png" alt="logo">
-            </div>
-            <nav class="nav">
-                <a href="servicios.php"> Servicios </a>
-                <a href="contacto.php"> Contacto </a>
-                <a href="actividades.php"> Actividades </a>
-                <a href="acceder.php"> Acceder </a>
-            </nav>
-        </header>
-
         <section class="principal">
-            <img src="img/portada.png" alt="portada">
+            <img src="img/portada2.jpg" alt="portada">
             <h2>CLÍNICA VITALMENTE</h2>
         </section>
-
         <section class="info">
             <div class="container-fluid">
-                <div class="row mt-3">
+                <div class="row">
                     <div class="col-4">
                         <div class="carousel slide" id="primer-carousel" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="img/imagen1.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen1.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen2.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen2.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen3.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen3.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item ">
-                                    <img src="img/imagen4.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen4.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen5.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen5.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen6.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen6.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item ">
-                                    <img src="img/imagen7.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen7.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen8.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen8.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen9.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen9.jpg" alt="" class="carr">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="img/imagen10.jpg" alt="" class="carr">
+                                    <img src="img/carrusel/imagen10.jpg" alt="" class="carr">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#primer-carousel" data-bs-slide="prev">
@@ -85,51 +81,39 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="main-content">
-                            <h2 class="card-title">Servicios</h2>
-                                <div class="card-servicios">
-                                    <div class="servicios">
-                                        <h3>Ansiedad</h3>
-                                        <img src="img/ansiedad.jpg" alt="ansiedad" class="card-img">
-                                        <div class="card-text">
-                                            <p>Ayudamos a las personas a gestionar la ansiedad mediante técnicas de relajación, terapia cognitivo-conductual y mindfulness. Nuestro objetivo es brindarte las herramientas necesarias para reducir el estrés y recuperar tu bienestar emocional.</p>
+                        <h2 class="text-center">Servicios</h2>
+                        <div class=" card-deck">
+                            <?php
+                                if($stmt->num_rows > 0){
+                                    while($servicios = $stmt->fetch_assoc()){
+                                        ?>
+                                        <div class="card">
+                                            <h1 class="card-title"><?= $servicios['nombre_servicio']; ?></h1>
+                                            <img src='<?= $servicios['imagen']; ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
+                                                <div class="card-body">
+                                                    <p class="card-text"><?= $servicios['descripcion']; ?></p>
+                                                </div>
+                                                <div>
+                                                    <?php
+                                                        if(isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'administrador'){
+                                                            echo '<a href="eliminarServicio.php?id_servicios=' . $servicios['id_servicios'] . '" class="btn btn-danger">Eliminar Servicios</a>';
+                                                        }else {
+                                                            echo '<a href="servicios.php?id_servicios=' . $servicios['id_servicios'] . '" class="btn btn-secondary">Saber más</a>';
+                                                        }
+                                                    ?>
+                                                </div>
                                         </div>
-                                        <a href="servicios.php"><button type="button">Saber más</button></a>
-                                    </div>
-                                    <div class="servicios">
-                                        <h3>Depresión</h3>
-                                        <img src="img/depresion.jpg" alt="depresion" class="card-img">
-                                        <div class="card-text">
-                                            <p>Ofrecemos un enfoque integral para tratar la depresión, combinando terapia individual, técnicas de afrontamiento y apoyo emocional. Te acompañamos en el proceso de recuperación para que puedas redescubrir la motivación y la alegría.</p>
-                                        </div>
-                                        <a href="servicios.php"><button type="button">Saber más</button></a>
-                                    </div>
-                                    <div class="servicios">
-                                        <h3>Terapia de pareja</h3>
-                                        <img src="img/problemaParejas.jpg" alt="problemasPareja" class="card-img">
-                                        <div class="card-text">
-                                            <p>Ayudamos a parejas a mejorar su comunicación, resolver conflictos y fortalecer su vínculo emocional. A través de terapias basadas en el diálogo y la empatía, facilitamos un espacio seguro para que las relaciones crezcan y florezcan nuevamente.</p>
-                                        </div>
-                                        <a href="servicios.php"><button type="button">Saber más</button></a>
-                                    </div> 
-                                </div>
-                         </div>
+                                        <?php
+                                    }
+                                }else {
+                                    echo "Servicios no disponibles";
+                                }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <footer>
-            <div class="navbar navbar-fixed-bottom fot">
-                <a href=""><img src="img/iconoFacebook.png" class="icon"></a>
-                <a href=""><img src="img/iconoInstagram.png" class="icon"></a>
-                <a href=""><img src="img/iconoYoutube.png" class="icon"></a>
-                <a href="#"><img src="img/iconoUbicacion.png" class="icon"></a>
-                <a href="#"><img src="img/iconoContacto.png" class="icon"></a>
-            </div>
-            <div class="commons">
-                <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;"><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
-            </div>
-        </footer>
+        <?php include_once("footer/footer.php"); ?>
     </body>
 </html>

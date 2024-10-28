@@ -13,7 +13,7 @@ include_once("config.php");
         $contrasenia = htmlspecialchars($contrasenia);
 
         //Convertir usuario a mayúscula 
-        $usuario = strtolower($usuario);
+        $usuario = strtoupper($usuario);
 
         //Query:
         $query = "SELECT id_usuarios, nombre,  email, contrasena, tipo_usuario  FROM usuarios

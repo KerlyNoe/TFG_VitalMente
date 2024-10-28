@@ -1,0 +1,44 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.contacto {
+    padding: 40px 0;
+}
+
+.container-fluid {
+    margin: 100px 0 0 0;
+}
+
+.info {
+    margin: 0 20px;
+}
+
+.contacto-info a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    margin: 25px 50px;
+    margin-bottom: 10px;
+}
+
+.contacto-info i {
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.btn {
+    background-color:#c57d56;
+    color: white;
+    padding: 10px 47%;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #eacdbc;
+    color: black;
+}
