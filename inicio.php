@@ -7,9 +7,20 @@
     //Configuración de la conexion a la base de datos. 
     include_once("config.php");
 
-    //Agregar el navegador.
-    include_once("header/navegadorPrimario.php");
+    if (!isset($_SESSION['tipo_usuario'])) {
+        header("Location: acceder.php");
+        exit();
+    }
+    
+    $tipo_usuario = $_SESSION['tipo_usuario'];
 
+    //Agregar el navegador.
+    if($tipo_usuario === 'normal'){
+        include_once("header/navegadorSecundario.php");
+
+    }else {
+        include_once("header/navegadorPrimario.php");
+    }
     //Sentencia que recupera solo los servicios disponibles de la base de datos.
     $query = "SELECT * FROM servicios 
                WHERE estado != 'eliminado' AND nombre_servicio 
