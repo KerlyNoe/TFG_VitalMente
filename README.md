@@ -6,4 +6,4 @@ si que me queda aún por hacer, a lo largo de esta semana ire haciendo los commi
 Archivos login.php y registro_usuario.php añadidos al proyecto.
 
 18 de Noviembre:
-Código actualizado de todas las páginas entregadas anteriormente, añandiendo nuevas como actividades, admin, paciente y profesionales, los navegadores ya corresponden con las páginas actuales, he igual los estilos están actualizados, no son fijos porque se irán modificando en las siguientes entregas. 
+Código actualizado de todas las páginas entregadas anteriormente, añandiendo nuevas como actividades, admin, paciente, los navegadores ya corresponden con las páginas actuales, he igual los estilos están actualizados, no son fijos porque se irán modificando en las siguientes entregas. 
