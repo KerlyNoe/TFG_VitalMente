@@ -6,15 +6,11 @@
     padding: 40px 0;
 }
 
-.container-fluid {
-    margin: 100px 0 0 0;
-}
-
-.info {
+.informacion {
     margin: 0 20px;
 }
 
-.contacto-info a {
+.contacto-informacion a {
     text-decoration: none;
     font-size: 20px;
     color: black;
@@ -23,12 +19,12 @@
     margin-bottom: 10px;
 }
 
-.contacto-info i {
+.contacto-informacion i {
     margin-right: 10px;
     font-size: 10px;
 }
 
-.btn {
+.boton {
     background-color:#c57d56;
     color: white;
     padding: 10px 47%;
@@ -38,7 +34,7 @@
     cursor: pointer;
 }
 
-.btn:hover {
+.boton:hover {
     background-color: #eacdbc;
     color: black;
 }
