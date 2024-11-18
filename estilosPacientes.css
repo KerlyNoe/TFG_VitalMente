@@ -1,0 +1,86 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.contenedor {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.seccion-usuario {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    width: 20%;
+    text-align: center;
+    float: inline-end;
+}
+
+.seccion-servicio {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    width: 20%;
+}
+
+h1 {
+    color: rgb(28, 28, 209);
+    text-align: center;
+    letter-spacing: 10px;
+    margin-top: 10px;
+}
+
+p {
+    color: red;
+}
+
+
+.seccion-usuario .nombre, .seccion-servicio select {
+    font-size: 25px;
+    width: 100%;
+}
+
+
+/* Calendario */
+#calendario {
+    background-color: #e5e5e5;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Formulario de cancelación de citas */
+.seccion-cancelar form {
+    display: flex;
+    flex-direction: column;
+}
+
+.seccion-cancelar label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.seccion-cancelar boton {
+    background-color: #d86b6b;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Tabla de resumen */
+.tabla-resumen {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-resumen th, .tabla-resumen td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+

@@ -123,6 +123,25 @@ p {
     color: black;
 }
 
+
+/*@media (max-width: 768px) {
+    .card-deck {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+}*/
+
 /*ESTILOS DE CONTACTO */
 .contacto {
     padding: 40px 0;
