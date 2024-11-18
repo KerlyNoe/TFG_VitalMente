@@ -2,7 +2,31 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
-/*ESTILOS CARRUSEL Y TEXTO*/
+.principal {
+    position: relative;
+    text-align: center;
+ }
+ 
+.principal img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    filter: blur(4px);
+ }
+ 
+.principal h2 {
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 48px;
+    text-shadow: 2px 2px 4px white;
+    margin: 0;
+    letter-spacing: 8px;
+    font-weight: bold;
+ }
+
 .info{
     margin: 20px 50px;
 }
@@ -26,18 +50,10 @@ p {
 
 
 /*ESTILOS SERVICIOS EN LA PÁGINA INICIO*/
-.container-fluid {
-    margin-top: 10px;
-    
-}
-
 .card {
     background-color: #fff;
     border: 1px solid #c5c3c3;
     padding: 20px;
-    /* width: 100%; */
-    /* margin-bottom: 100px; */
-    /* margin-top: 100px; */
     box-shadow: 0 4px 8px rgba(228, 225, 225, 0.555);
     border-radius: 10px;
     max-width: 1700px;
@@ -107,48 +123,45 @@ p {
     color: black;
 }
 
-
-@media (max-width: 768px) {
-    .card-deck {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .card-title {
-        font-size: 1.2rem;
-    }
-
-    .card-text {
-        font-size: 0.9rem;
-    }
-}
-
-
-
-
 /*ESTILOS DE CONTACTO */
 .contacto {
-    margin-top: 150px;
-    /* cursor: pointer; */
+    padding: 40px 0;
 }
 
-.contacto a{
-    text-decoration: none;
-    color: black;
-    margin-top: 25px;
-    display: block;
-    cursor: pointer;
+.informacion {
+    margin: 0 20px;
+}
 
+.contacto-info a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    margin: 25px 50px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.boton {
+    background-color:#c57d56;
+    color: white;
+    padding: 10px 47%;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #eacdbc;
+    color: black;
 }
 
 /*ESTILOS ACCEDER Y REGISTRO*/
 .container {
     display: flex;
-    margin-top: 200px;
-    margin-bottom: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     width: 70%;
     height: 80vh;
     background-color: #F9F1F0;
@@ -166,7 +179,7 @@ p {
 
 .derecha .imagen {
     max-width: 100%;
-    height: 650px;
+    height: 550px;
 }
 
 .izquierda {
@@ -231,4 +244,26 @@ button.submit-btn:hover {
 
 .registrar:hover {
     text-decoration: underline;
+}
+
+/*NOTIFICACIONES*/
+.notificacion {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    color: black;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+}
+
+.exito {
+    background-color: greenyellow;
+}
+
+.error {
+    background-color: red;
 }
