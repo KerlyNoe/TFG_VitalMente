@@ -3,4 +3,7 @@ El proyecto actualmente tiene las páginas principales las cuales se seguiran de
 si que me queda aún por hacer, a lo largo de esta semana ire haciendo los commits del avance. 
 
 21 de Octubre:
-Archivos login.php y registro_usuario.php añadidos al proyecto. 
+Archivos login.php y registro_usuario.php añadidos al proyecto.
+
+18 de Noviembre:
+Código actualizado de todas las páginas entregadas anteriormente, añandiendo nuevas como actividades, admin, paciente y profesionales, los navegadores ya corresponden con las páginas actuales, he igual los estilos están actualizados, no son fijos porque se irán modificando en las siguientes entregas. 
