@@ -3,7 +3,7 @@
         session_start();
     }
     include_once("config.php");
-    include_once("header/navegadorServicios.php");
+    include_once("header/navegadorSecundario.php");
 
     $query = "SELECT * FROM servicios
               WHERE estado != 'eliminado'";
@@ -17,7 +17,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Servicios</title>
+        <title>Clínica Vitalmente | Servicios</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/estiloServicios.css">
@@ -93,7 +93,7 @@
                                         <?php
                                     }
                                 }else {
-                                    echo "Servicios no disponibles";
+                                    echo "No se encuentran profesionales";
                                 }
                             ?>
                         </div>
