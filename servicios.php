@@ -10,7 +10,7 @@
     $query = "SELECT * FROM servicios
               WHERE estado != 'eliminado'";
     $stmt = $conn->query($query);
-    $query2 = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.email, usuarios.telefono, profesionales.foto, profesionales.especialidad, profesionales.descripcion  FROM usuarios
+    $query2 = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.segundo_apellido, usuarios.email, usuarios.telefono, profesionales.foto, profesionales.especialidad, profesionales.descripcion  FROM usuarios
                INNER JOIN profesionales
                ON usuarios.id_usuarios = profesionales.id_usuario
                WHERE estado != 'baja'";
@@ -51,15 +51,7 @@
                                         <li class="list-group-item precio text-danger"><?= $servicios['precio']; ?> €</li>
                                     </ul>
                                     <div class="card-footer boton">
-                                        <?php
-                                            if(isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'administrador'){
-                                                echo '<a href="eliminarServicio.php?id_servicios=' . $servicios['id_servicios'] . '" class="btn btn-danger w-100">Eliminar Servicio</a>';
-                                            } elseif(isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'normal') {
-                                                echo '<a href="reservarServicio.php?id_servicios=' . $servicios['id_servicios'] . '" class="btn btn-secondary w-100">Reservar</a>';
-                                            }else {
-                                                echo '<a href="acceder.php" class="btn btn-success w-100">Reservar</a>';
-                                            }
-                                        ?>
+                                        <a href="acceder.php" class="btn btn-success w-100">Reservar</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +75,7 @@
                             ?>
                                 <div class="col">
                                     <div class="card h-100">
-                                        <h1 class="card-title"><?= $profesional['nombre']; ?></h1>
+                                        <h1 class="card-title"><?= $profesional['nombre'] . ' ' . $profesional['primer_apellido'] . ' ' . $profesional['segundo_apellido']; ?></h1>
                                         <img src='<?= $profesional['foto']; ?>' class="card-img-top" alt='<?= $profesional['nombre']; ?>'>
                                         <div class="card-body">
                                             <p class="card-text"><span><?= $profesional['especialidad']; ?></span></p>
@@ -93,13 +85,6 @@
                                             <li class="list-group-item text-info" ><span class="text-dark">Teléfono:</span> <?= $profesional['telefono']; ?></li>
                                             <li class="list-group-item text-info"><span class="text-dark">Email:</span> <?= $profesional['email']; ?></li>
                                         </ul>
-                                        <div class="card-footer">
-                                            <?php
-                                                if(isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'administrador'){
-                                                    echo '<a href="eliminarProfesional.php?id_profesionales=' . $profesional['id_profesionales'] . '" class="btn btn-danger w-100">Eliminar Profesional</a>';
-                                                }
-                                            ?>
-                                        </div>
                                     </div>
                                 </div>
                             <?php

@@ -158,9 +158,9 @@
                     while ($servicio = $resultServicios->fetch_assoc()) {
                         echo '<div class="col-md-4 mb-4">';
                         echo '<div class="card h-100">';
+                        echo '<h1 class="card-title text-center">' . htmlspecialchars($servicio['nombre_servicio']) . '</h1>';
                         echo '<img src="' . htmlspecialchars($servicio['imagen']) . '" class="card-img-top" alt="' . htmlspecialchars($servicio['nombre_servicio']) . '">';
                         echo '<div class="card-body">';
-                        echo '<h5 class="card-title text-center">' . htmlspecialchars($servicio['nombre_servicio']) . '</h5>';
                         echo '<p class="card-text">' . htmlspecialchars($servicio['descripcion']) . '</p>';
                         echo '<p class="card-text"><strong>Asistencia:</strong> ' . htmlspecialchars($servicio['asistencia']) . '</p>';
                         echo '<p class="card-text"><strong>Precio:</strong> ' . htmlspecialchars($servicio['precio']) . '</p>';
@@ -174,38 +174,46 @@
                 ?>
             </div>
             <div class="text-end mb-4">
-                <a href="insertar_servicios.php" class="btn btn-primary">Editar Servicios</a>
+                <a href="insertarServicios_formulario.php" class="btn btn-primary">Añadir Servicios</a>
+                <a href="eliminarServicios_todos.php" class="btn btn-primary">Eliminar Servicios</a>
             </div>
 
             <h1 class="titulo text-center">Profesionales</h1>
             <div class="row">
-                <?php
-                $queryProfesionales = "SELECT * FROM profesionales
-                                    WHERE estado != 'baja' AND id_profesionales IN (1, 2, 3)";
-                $resultProfesionales = $conn->query($queryProfesionales);
+            <?php
+    $queryProfesionales = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.segundo_apellido, usuarios.email, usuarios.telefono, profesionales.foto, profesionales.especialidad, profesionales.descripcion  
+                           FROM usuarios
+                           INNER JOIN profesionales ON usuarios.id_usuarios = profesionales.id_usuario
+                           WHERE estado = 'activa' AND id_profesionales IN (1, 2, 3)";
+    $resultProfesionales = $conn->query($queryProfesionales);
 
-                if ($resultProfesionales && $resultProfesionales->num_rows > 0) {
-                    while ($profesional = $resultProfesionales->fetch_assoc()) {
-                        echo '<div class="col-md-4 mb-4">';
-                        echo '<div class="card h-100">';
-                        echo '<img src="' . htmlspecialchars($profesional['foto']) . '" class="card-img-top" alt="' . htmlspecialchars($profesional['nombre']) . '">';
-                        echo '<div class="card-body">';
-                        echo '<h5 class="card-title text-center">' . htmlspecialchars($profesional['nombre']) . '</h5>';
-                        echo '<p class="card-text"><strong>Especialidad:</strong> ' . htmlspecialchars($profesional['especialidad']) . '</p>';
-                        echo '<p class="card-text">' . htmlspecialchars($profesional['descripcion']) . '</p>';
-                        echo '<p class="card-text"><strong>Teléfono:</strong> ' . htmlspecialchars($profesional['telefono']) . '</p>';
-                        echo '<p class="card-text"><strong>Email:</strong> ' . htmlspecialchars($profesional['email']) . '</p>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<div class="alert alert-warning text-center">No existen profesionales</div>';
-                }
-                ?>
+    if ($resultProfesionales && $resultProfesionales->num_rows > 0) {
+        while ($profesional = $resultProfesionales->fetch_assoc()) {
+            // Usar heredoc para la concatenación y hacerlo más limpio
+            echo <<<HTML
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <h3 class="card-title text-center">{$profesional['nombre']}</h3>
+                    <img src="{$profesional['foto']}" class="card-img-top" alt="Foto de {$profesional['nombre']}">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Especialidad:</strong> {$profesional['especialidad']}</p>
+                        <p class="card-text">{$profesional['descripcion']}</p>
+                        <p class="card-text"><strong>Teléfono:</strong> {$profesional['telefono']}</p>
+                        <p class="card-text"><strong>Email:</strong> {$profesional['email']}</p>
+                    </div>
+                </div>
+            </div>
+HTML;
+        }
+    } else {
+        echo '<div class="alert alert-warning text-center">No existen profesionales disponibles.</div>';
+    }
+?>
+
             </div>
             <div class="text-end">
-                <a href="insertar_profesionales.php" class="btn btn-primary">Editar Profesionales</a>
+                <a href="insertarProfesionales_formulario.php" class="btn btn-primary">Añadir Profesionales</a>
+                <a href="eliminarProfesionales_todos.php" class="btn btn-primary">Eliminar Profesionales</a>
             </div>
         </div>
     </body>
