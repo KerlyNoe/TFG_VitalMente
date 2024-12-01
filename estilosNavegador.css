@@ -1,0 +1,52 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+    background-color: #f8f9fa; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del logo */
+header .logo img {
+    height: auto;
+    width: 200px;
+}
+
+/* Estilo para la barra de navegación en dispositivos móviles */
+.navbar-toggler {
+    border: none; 
+}
+
+/* Estilo para el menú colapsado */
+.navbar-collapse {
+    text-align: center;
+}
+
+/* Estilo de los enlaces dentro del menú colapsado */
+.navbar-nav {
+    flex-direction: column;
+}
+
+/* Estilo de los enlaces cuando el menú está colapsado */
+.navbar-nav .btn {
+    width: 100%; 
+    margin: 10px; 
+}
+
+footer .text-muted {
+    padding: 0;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    header .container-fluid {
+        padding: 15px;
+    }
+
+    .navbar-nav .btn {
+        font-size: 14px; 
+    }
+}
+

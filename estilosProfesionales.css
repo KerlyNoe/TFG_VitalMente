@@ -1,0 +1,79 @@
+/* Estilo general */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Foto del profesional */
+img.rounded-circle {
+    border: 3px solid #0d6efd;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+/* Encabezados */
+h2.text-primary {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+h3 {
+    margin-top: 1rem;
+    color: #0d6efd;
+    text-align: center;
+}
+
+/* Calendario */
+#calendar {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+/* Tablas */
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table thead th {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.table tbody td {
+    color: #333;
+}
+
+/* Botones */
+.btn {
+    border-radius: 5px;
+}
+
+.btn-primary,
+.btn-success {
+    padding: 10px 15px;
+    font-size: 16px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 768px) {
+    img.rounded-circle {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    h2.text-primary {
+        font-size: 1.5rem;
+    }
+}

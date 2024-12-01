@@ -1,0 +1,151 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+}
+
+/* Estilo para la sección principal */
+.principal {
+    position: relative;
+    text-align: center;
+}
+
+.principal img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    filter: blur(4px);
+}
+
+.principal h2 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 48px;
+    text-shadow: 2px 2px 4px black;
+    font-weight: bold;
+}
+
+.info {
+    margin: 20px 0;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.carr {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+
+/* Servicios de la página de inicio */
+.card {
+    background-color: #fff;
+    border: none;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(228, 225, 225, 0.555);
+    border-radius: 15px;
+    margin: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.card-img-top:hover {
+    transform: scale(1.05); 
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Estilo para el botón */
+.btn {
+    color: white;
+    padding: 12px 25px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+/* Estilo del contenedor de las tarjetas */
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.card-deck .card {
+    max-width: 320px;
+    flex: 1 1 30%;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .card-deck {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+}

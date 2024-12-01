@@ -10,31 +10,119 @@
     margin: 0 20px;
 }
 
-.contacto-informacion a {
-    text-decoration: none;
-    font-size: 20px;
-    color: black;
-    display: block;
-    margin: 25px 50px;
-    margin-bottom: 10px;
+.contacto-info h3 {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.contacto-informacion i {
-    margin-right: 10px;
-    font-size: 10px;
+/* Contenedor de iconos de contacto */
+.contacto-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
 }
 
-.boton {
-    background-color:#c57d56;
-    color: white;
-    padding: 10px 47%;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+/* Estilos para los iconos de las redes sociales y contacto */
+.iconos-arriba,
+.iconos-abajo {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    gap: 30px;
+    margin-top: 150px;
 }
 
-.boton:hover {
-    background-color: #eacdbc;
-    color: black;
+.iconos-arriba a,
+.iconos-abajo a {
+    text-align: center;
+}
+
+/* Estilos comunes para los iconos */
+.icono {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.icono:hover {
+    background-color: #c4d5f3;
+    transform: scale(1.1);
+}
+
+.icono img {
+    width: 70px;
+    height: 70px;
+}
+
+/* Estilo del formulario */
+.formulario h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario .informacion {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario .form-control {
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.formulario .form-control:focus {
+    border-color: #c57d56;
+    box-shadow: 0 0 5px rgba(197, 125, 86, 0.5);
+}
+
+@media (max-width: 768px) {
+    .contacto-info {
+        margin-bottom: 20px;
+    }
+
+    .iconos-arriba,
+    .iconos-abajo {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .icono {
+        width: 60px;
+        height: 60px;
+    }
+
+    .icono img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .boton {
+        padding: 10px 20%;
+    }
+}
+
+@media (max-width: 480px) {
+    .icono {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icono img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .btn {
+        padding: 10px 15%;
+    }
 }
