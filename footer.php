@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title></title>
-        <link rel="stylesheet" href="css/estiloshf.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="css/estilosNavegador.css">
     </head>
     <body>
-        <footer>
-            <div class="navbar navbar-fixed-bottom fot">
-                <a href=""><img src="img/iconoFacebook.png" class="icon"></a>
-                <a href=""><img src="img/iconoInstagram.png" class="icon"></a>
-                <a href=""><img src="img/iconoYoutube.png" class="icon"></a>
-                <a href="#"><img src="img/iconoUbicacion.png" class="icon"></a>
-                <a href="#"><img src="img/iconoContacto.png" class="icon"></a>
+        <footer class="bg-light py-4">
+            <div class="container">
+                <div class="row text-center text-md-start">
+                    <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start mb-3 mb-md-0 gap-3">
+                        <a href="#"><img src="img/iconoFacebook.png" class="img-fluid" alt="Facebook" style="max-height: 30px;"></a>
+                        <a href="#"><img src="img/iconoInstagram.png" class="img-fluid" alt="Instagram" style="max-height: 30px;"></a>
+                        <a href="#"><img src="img/iconoYoutube.png" class="img-fluid" alt="YouTube" style="max-height: 30px;"></a>
+                        <a href="#"><img src="img/iconoUbicacion.png" class="img-fluid" alt="Ubicación" style="max-height: 30px;"></a>
+                        <a href="#"><img src="img/iconoContacto.png" class="img-fluid" alt="Contacto" style="max-height: 30px;"></a>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-items-center">
+                        <p class="text-muted m-0">&copy; 2024 - VitalMente. Todos los derechos reservados.</p>
+                    </div>
+                </div>
             </div>
-            <div class="commons">
-                <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;"><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:32px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
-            </div>
-        </footer>   
+        </footer>
     </body>
 </html>
