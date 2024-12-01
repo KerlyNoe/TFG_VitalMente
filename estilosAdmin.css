@@ -64,6 +64,9 @@
     margin-bottom: 10px;
 }
 
+.card-title::first-letter {
+    text-transform: uppercase;
+}
 .card-text {
     font-size: 15px;
     color: #555555;
