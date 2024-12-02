@@ -5,6 +5,18 @@
 
     include_once("config.php");
 
+    // Verifica si el usuario está autenticado
+    if (!isset($_SESSION['tipo_usuario'])) {
+        header("Location: acceder.php");
+        exit();
+    }
+
+    // Solo permite acceso a administradores
+    if ($_SESSION['tipo_usuario'] !== 'administrador') {
+        header("Location: acceder.php");
+        exit();
+    }
+
     // Capturar mensaje y tipo 
     $mensaje = isset($_GET['mensaje']) ? htmlspecialchars($_GET['mensaje']) : '';
     $tipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
@@ -20,10 +32,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Clínica Vitalmente | Servicios</title>
+        <title>Clínica Vitalmente | Eliminar Profesional </title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/estilosServicios.css">
+        <script>
+            function confirmarEliminacion (idProfesional) {
+                conts confirmacion = confirm('¿Seguro que quiere eliminar al profesional?');
+                if(confirmacion) {
+                    window.location.href= 'eliminarProfesional.php?id_profesionales=${idProfesional}';
+                }
+            }
+        </script>
     </head>
     <body>
         <!-- Notificaciones -->
@@ -52,7 +72,9 @@
                                             <li class="list-group-item text-info"><span class="text-dark">Email:</span> <?= $profesional['email']; ?></li>
                                         </ul>
                                         <div class="card-footer">
-                                            <a href="eliminarProfesional.php?id_profesionales=' . $profesional['id_profesionales'] . '" class="btn btn-danger w-100">Eliminar Profesional</a>
+                                            <form action="eliminarProfesional.php" method="POST">
+                                                <button type="submit" class="btn btn-danger w-100" onlick="confirmarEliminacion(<?= $profesional['id_profesionales']; ?>)">Eliminar Profesional</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

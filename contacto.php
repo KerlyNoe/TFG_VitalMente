@@ -5,6 +5,10 @@
 
     include_once("config.php");
     include_once("header/navegadorTres.php");
+
+    // Capturar mensaje y tipo 
+    $mensaje = isset($_GET['mensaje']) ? htmlspecialchars($_GET['mensaje']) : '';
+    $tipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,6 +21,13 @@
         <link rel="stylesheet" href="css/estilosContacto.css">
     </head>
     <body>
+        <!-- Notificaciones -->
+        <?php if (!empty($mensaje) && !empty($tipo)): ?>
+            <div id="notificacion" class="alert <?= $tipo; ?> text-center" role="alert">
+                <?= $mensaje; ?>
+            </div>
+        <?php endif; ?>
+
         <section class="contacto">
             <div class="container-fluid container-contacto">
                 <div class="row">
@@ -52,20 +63,20 @@
                         <div class="informacion">
                             <p>¿Tienes alguna pregunta o necesitas ayuda? Escríbenos si tienes dudas sobre nuestros servicios, deseas agendar una cita o simplemente necesitas más información. Nuestro equipo estará encantado de ayudarte y responder a tus consultas. Completa el formulario y nos pondremos en contacto contigo lo antes posible. ¡Estamos aquí para escucharte!</p>
                         </div>
-                        <form action="mailto:infoVitalmente@gmail.com" method="POST">
+                        <form action="enviarContacto.php" method="POST">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" class="form-control" required>
+                                <input type="text" name="nombre" id="nombre" class="form-control" autocomplete="name" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Correo Electrónico</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
+                                <input type="email" name="email" id="email" class="form-control" autocomplete="email" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="mensaje" class="form-label">Mensaje</label>
-                                <textarea name="mensaje" id="mensaje" rows="10" class="form-control" required></textarea>
+                                <textarea name="mensaje" id="mensaje" rows="10" class="form-control" autocomplete="on" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-success">Enviar</button>
                         </form>
@@ -80,6 +91,20 @@
                 </div>
             </div>
         </section>
+        <!-- Script para Ocultar Notificaciones -->
+        <script>
+            window.onload = function() {
+                const notificacion = document.getElementById('notificacion');
+                if (notificacion) {
+                    setTimeout(() => {
+                        notificacion.style.opacity = '0';
+                    }, 2000);
+                    setTimeout(() => {
+                        notificacion.remove();
+                    }, 4500);
+                }
+            };
+        </script>
     </body>
 </html>
 <?php include_once("footer/footer.php"); ?>

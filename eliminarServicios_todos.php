@@ -5,6 +5,18 @@
 
     include_once("config.php");
 
+    // Verifica si el usuario está autenticado
+    if (!isset($_SESSION['tipo_usuario'])) {
+        header("Location: acceder.php");
+        exit();
+    }
+
+    // Solo permite acceso a administradores
+    if ($_SESSION['tipo_usuario'] !== 'administrador') {
+        header("Location: acceder.php");
+        exit();
+    }
+
     // Capturar mensaje y tipo 
     $mensaje = isset($_GET['mensaje']) ? htmlspecialchars($_GET['mensaje']) : '';
     $tipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
@@ -18,10 +30,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Clínica Vitalmente | Eliminar Servicios</title>
+        <title>Clínica Vitalmente | Eliminar Servicio</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/estilosServicios.css">
+        <script>
+            function confirmarEliminacion (idServicio) {
+                conts confirmacion = confirm('¿Seguro que quiere eliminar el servicio?');
+                if(confirmacion) {
+                    window.location.href= 'eliminarServicio.php?id_servicios=${idServicio}';
+                }
+            }
+        </script>
     </head>
     <body>
         <!-- Notificaciones -->
@@ -50,7 +70,9 @@
                                         <li class="list-group-item precio text-danger"><?= $servicios['precio']; ?> €</li>
                                     </ul>
                                     <div class="card-footer boton">
-                                        <a href="eliminiarServicio.php" class="btn btn-danger w-100">Eliminar Servicio</a>
+                                        <form action="eliminiarServicio.php" method="POST">
+                                            <button type="submit" class="btn btn-danger w-100" onclick="confirmarEliminacion(<?= $servicios['id_servicios']; ?>)">Eliminar Servicio</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
