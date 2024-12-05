@@ -7,15 +7,18 @@ body {
 
 /* Foto del profesional */
 img.rounded-circle {
-    border: 3px solid #0d6efd;
-    max-width: 150px;
-    max-height: 150px;
+    border: 3px solid blueviolet !important;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
 }
 
 /* Encabezados */
-h2.text-primary {
-    font-size: 1.8rem;
+h2.text-secondary{
+    font-size: 20px;
+    text-transform: uppercase;
     font-weight: bold;
+    margin-left: 10px;
 }
 
 h3 {
@@ -25,12 +28,42 @@ h3 {
 }
 
 /* Calendario */
-#calendar {
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
+#calendario {
+    background-color: white !important;
+    max-width: 100%;
+    margin: 0 auto;
     padding: 10px;
-    background-color: #ffffff;
+    box-sizing: border-box;
 }
+
+/* Estilos de botones del calendario */
+.fc-button {
+    padding: 10px;
+    background-color: #cdd7f6 !important;
+    border-color:  #cdd7f6  !important;
+    color: black !important;
+}
+
+.fc-button:hover {
+    background-color:  #e4e9f9  !important;
+    border-color:  #e4e9f9  !important;
+    color: white !important;
+}
+
+.fc .fc-col-header-cell-cushion, .fc-daygrid-day-number  {
+    color: black !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+}
+
+.fc .fc-toolbar-title {
+    text-transform: uppercase;
+}
+
+a {
+    text-align: center;
+}
+
 
 /* Tablas */
 .table-responsive {

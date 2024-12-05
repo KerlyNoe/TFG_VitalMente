@@ -1,52 +1,53 @@
-.calendar-container {
+body {
     background-color: #f8f9fa;
-    border-radius: 10px;
+}
+
+div .container {
+    margin: 130px auto;
+}
+
+.form-container {
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 50px auto;
-    max-width: 90%;
 }
 
-#calendar {
-    height: 100%;
+/* Estilo de los inputs */
+.input-custom {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    transition: border-color 0.3s;
 }
 
-.page-title {
-    text-align: center;
-    font-size: 2rem;
-    color: black;
-    margin: 30px 0;
+.input-custom:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.fc-button {
-    background-color: #cdd7f6 !important;
-    border-color:  #cdd7f6  !important;
-    color: black !important;
+/* Botones */
+button.btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s;
 }
 
-.fc-button:hover {
-    background-color:  #e4e9f9  !important;
-    border-color:  #e4e9f9  !important;
-    color: white !important;
+button.btn-primary:hover {
+    background-color: #0056b3;
 }
 
-.fc .fc-toolbar-title, .fc-col-header-cell-cushion , .fc-daygrid-day-number  {
-    color: black !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
+/* Espaciado */
+.form-container h1 {
+    color: #343a40;
+    font-weight: bold;
 }
 
-@media (max-width: 768px) {
-    #calendar {
-        font-size: 0.85rem; 
-    }
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
 
-    .fc-toolbar.fc-header-toolbar {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    .fc-toolbar .fc-toolbar-chunk {
-        margin-bottom: 10px; 
-    }
+.btn-secondary:hover {
+    background-color: #565e64;
 }

@@ -1,153 +1,133 @@
+/* Contenedor principal */
 .contenedor {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
+    justify-content: flex-start;
+    min-height: 100vh; /* Asegura que se ocupe toda la altura de la ventana */
     margin: 0;
     padding-top: 20px;
 }
 
-/* Contenedor superior: usuario y servicios */
+/* Contenedor de la cabecera */
 .contenedor-cabecera {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
-    max-width: 750px;
-    padding: 10px 20px;
+    max-width: 750px; /* Limita el ancho máximo */
+    text-align: center;
     margin-bottom: 20px;
 }
 
+/* Sección del usuario */
 .seccion-usuario {
-    text-align: left;
-    flex: 0 0 30%;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.seccion-servicio {
-    text-align: right;
-    flex: 0 0 30%;
+/* Cabecera h2 */
+.seccion-usuario h2 {
+    font-size: 25px;
+    color: #333;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-/* Contenido central */
+/* Contenido principal centrado */
 .contenido-central {
     width: 100%;
-    max-width: 800px;
-    text-align: center;
+    max-width: 750px;
+    margin: 0 auto; /* Centramos el contenido */
+    padding: 20px;
 }
 
+/* Estilo para las tarjetas de servicio */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.233);
+    margin: 10px 0;
+}
+
+/* Títulos de las tarjetas */
+.card-title {
+    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Precios en las tarjetas */
+.precio {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Formulario de cancelación */
 .seccion-cancelar {
-    flex: 1 1 auto;
-    min-width: 200px;
-    max-width: 300px;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+    max-width: 350px;
+    width: 100%;
+    margin: 10px auto;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
+/* Ajuste en la sección de cancelación para moverla hacia abajo */
+.seccion-cancelar p {
+    margin-top: 30px; /* Mueve el mensaje más abajo */
+    font-size: 1rem; /* Ajusta el tamaño de la fuente si es necesario */
+    color: rgb(150, 150, 150); /* Color más suave para el texto */
+}
+
+
+/* Estilo de los botones */
+.seccion-cancelar button {
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+/* Títulos principales */
 h1 {
     color: rgb(28, 28, 209);
-    text-align: center;
-    letter-spacing: 10px;
+    letter-spacing: 2px;
     margin-top: 10px;
+    font-size: 2rem;
 }
 
+/* Párrafos con advertencias */
 p {
     color: red;
 }
 
-/* Calendario */
-#calendario {
-    background-color: white !important;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-/* Estilos de botones del calendario */
-.fc-button {
-    padding: 10px;
-    background-color: #cdd7f6 !important;
-    border-color:  #cdd7f6  !important;
-    color: black !important;
-}
-
-.fc-button:hover {
-    background-color:  #e4e9f9  !important;
-    border-color:  #e4e9f9  !important;
-    color: white !important;
-}
-
-.fc .fc-col-header-cell-cushion, .fc-daygrid-day-number  {
-    color: black !important;
-    text-decoration: none !important;
-    text-transform: uppercase;
-}
-
-.fc .fc-toolbar-title {
-    text-transform: uppercase;
-}
-
-a {
-    text-align: center;
-}
-
-/* Formulario de cancelación de citas */
-.seccion-cancelar form {
-    display: flex;
-    flex-direction: column;
-}
-
-.seccion-cancelar label {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.seccion-cancelar button {
-    background-color: #d86b6b;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    #calendario {
-        margin-left:50px;
+/* Ajustes de responsividad */
+@media (max-width: 767px) {
+    /* Ajuste para el contenedor central */
+    .contenedor-cabecera {
+        max-width: 100%;
     }
 
-    .seccion-servicio select {
-        font-size: 14px; 
-        padding: 5px; 
-        width: 150px; 
+    /* Ajuste para las tarjetas */
+    .row-cols-md-2 {
+        display: flex;
+        flex-direction: column; /* Alineación vertical en dispositivos pequeños */
     }
 
-    .fc {
-        font-size: 12px;
+    .seccion-cancelar {
+        width: 100%;
+        margin-top: 20px;
     }
 
-    .fc-toolbar {
-        flex-wrap: wrap;
+    .card-title {
+        font-size: 1rem; /* Reduce el tamaño de fuente en móviles */
     }
 
-    .fc-toolbar .fc-left,
-    .fc-toolbar .fc-center,
-    .fc-toolbar .fc-right {
-        flex: 1 1 100%;
-        text-align: center;
-        margin-bottom: 10px;
+    /* Sección del usuario */
+    .seccion-usuario h2 {
+        font-size: 1.5rem; /* Reduce el tamaño de la fuente del nombre en móviles */
     }
 
-    .fc-dayGridMonth-view {
-        /* Reduce el tamaño de las celdas en pantallas pequeñas */
-        grid-template-columns: repeat(7, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .seccion-servicio select {
-        font-size: 12px;
-        padding: 3px;
-        width: 120px;
+    /* Mejor ajuste de márgenes */
+    .contenido-central {
+        padding: 10px;
+        margin: 0 10px;
     }
 }
