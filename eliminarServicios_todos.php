@@ -35,10 +35,9 @@
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/estilosServicios.css">
         <script>
-            function confirmarEliminacion (idServicio) {
-                conts confirmacion = confirm('¿Seguro que quiere eliminar el servicio?');
-                if(confirmacion) {
-                    window.location.href= 'eliminarServicio.php?id_servicios=${idServicio}';
+            function confirmarEliminacion (event) {
+                if(!confirm('¿Seguro que quiere eliminar el servicio?')) {
+                    event.preventDefault();
                 }
             }
         </script>
@@ -61,7 +60,7 @@
                             <div class="col mt-5">
                                 <div class="card h-100">
                                     <h1 class="card-title text-center"><?= $servicios['nombre_servicio']; ?></h1>
-                                    <img src='<?= $servicios['imagen']; ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
+                                    <img src='<?= $imagen = "img/servicios/" . htmlspecialchars($servicios['imagen']); ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
                                     <div class="card-body">
                                         <p class="card-text"><?= $servicios['descripcion']; ?></p>
                                     </div>
@@ -70,8 +69,9 @@
                                         <li class="list-group-item precio text-danger"><?= $servicios['precio']; ?> €</li>
                                     </ul>
                                     <div class="card-footer boton">
-                                        <form action="eliminiarServicio.php" method="POST">
-                                            <button type="submit" class="btn btn-danger w-100" onclick="confirmarEliminacion(<?= $servicios['id_servicios']; ?>)">Eliminar Servicio</button>
+                                        <form action="eliminarServicio.php" method="POST">
+                                            <input type="hidden" name="id_servicios" value="<?= $servicios['id_servicios']; ?>">
+                                            <button type="submit" class="btn btn-danger w-100" onclick="confirmarEliminacion(event)">Eliminar Servicio</button>
                                         </form>
                                     </div>
                                 </div>
