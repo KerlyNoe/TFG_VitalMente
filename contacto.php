@@ -18,7 +18,7 @@
         <title>Clínica Vitalmente | Contacto</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="css/estilosContacto.css">
+        <link rel="stylesheet" href="/css/estilosContacto.css">
     </head>
     <body>
         <!-- Notificaciones -->
@@ -35,25 +35,21 @@
                     <div class="col-lg-6 col-md-12 contacto-info">
                         <h1 class="text-info ms-5">Contáctanos a través de nuestras redes sociales:</h1>
                         <div class="contacto-icons">
-                            <div class="iconos-arriba">
-                                <a href="#" class="icono">
-                                    <img src="img/iconoFacebook.png" alt="Facebook">
-                                </a>
-                                <a href="#" class="icono">
-                                    <img src="img/iconoInstagram.png" alt="Instagram">
-                                </a>
-                                <a href="#" class="icono">
-                                    <img src="img/iconoYoutube.png" alt="YouTube">
-                                </a>
-                            </div>
-                            <div class="iconos-abajo">
-                                <a href="tel:673925379" class="icono">
-                                    <img src="img/iconoContacto.png" alt="Teléfono">
-                                </a>
-                                <a href="mailto:vitalmente@gmail.com" class="icono">
-                                    <img src="img/iconoEmail.png" alt="Correo">
-                                </a>
-                            </div>
+                            <a href="#" class="icono">
+                                <img src="img/iconoFacebook.png" alt="Facebook">
+                            </a>
+                            <a href="#" class="icono">
+                                <img src="img/iconoInstagram.png" alt="Instagram">
+                            </a>
+                            <a href="#" class="icono">
+                                <img src="img/iconoYoutube.png" alt="YouTube">                                
+                            </a>
+                            <a href="tel:673925379" class="icono">
+                                <img src="img/iconoContacto.png" alt="Teléfono">
+                            </a>
+                            <a href="mailto:vitalmente@gmail.com" class="icono">
+                                <img src="img/iconoEmail.png" alt="Correo">
+                            </a>
                         </div>
                     </div>
 
@@ -108,7 +104,3 @@
     </body>
 </html>
 <?php include_once("footer/footer.php"); ?>
-
-
-
-
