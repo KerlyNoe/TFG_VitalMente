@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/estilosNavegador.css">
     </head>
     <body>
-        <footer class="bg-light py-4">
+        <footer class="bg-light py-4" id="footer">
             <div class="container">
                 <div class="row text-center text-md-start">
                     <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start mb-3 mb-md-0 gap-3">
@@ -25,5 +25,17 @@
                 </div>
             </div>
         </footer>
+
+        <!-- Script para volver al incio al dar clic en el footer -->
+        <script>
+            const footer = document.getElementById('footer');
+            footer.addEventListener('click', () => {
+                // Realiza el scroll hacia arriba
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        </script>
     </body>
 </html>
