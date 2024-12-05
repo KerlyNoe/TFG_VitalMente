@@ -54,7 +54,7 @@
 
                         <div class="mb-3">
                             <label for="imagen" class="form-label">Agregar imagen:</label>
-                            <input type="file" name="imagen" id="imagen" class="form-control" accept="image/*" required>
+                            <input type="text" name="imagen" id="imagen" class="form-control" accept="image/*" required>
                         </div>
 
                         <div class="mb-3">

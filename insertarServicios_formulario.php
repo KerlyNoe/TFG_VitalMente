@@ -48,17 +48,17 @@
 
                     <form action="insertarServicios.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre del servicio:</label>
+                            <label for="nombre" class="form-label">Nombre del servicio<span>*</span></label>
                             <input type="text" name="nombre" id="nombre" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="imagen" class="form-label">Agregar imagen</label>
-                            <input type="file" name="imagen" id="imagen" class="form-control" accept="image/*" required>
+                            <label for="imagen" class="form-label">Agregar imagen<span>*</span></label>
+                            <input type="text" name="imagen" id="imagen" class="form-control" accept="image/*" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <label for="descripcion" class="form-label">Descripción<span>*</span></label>
                             <textarea name="descripcion" id="descripcion" class="form-control" rows="5" required>Agrega un texto</textarea>
                         </div>
 
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="precio" class="form-label">Precio:</label>
+                            <label for="precio" class="form-label">Precio<span>*</span></label>
                             <input type="number" name="precio" id="precio" class="form-control" required>
                         </div>
 
