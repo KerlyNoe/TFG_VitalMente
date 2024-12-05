@@ -38,9 +38,8 @@
         <link rel="stylesheet" href="css/estilosServicios.css">
         <script>
             function confirmarEliminacion (idProfesional) {
-                conts confirmacion = confirm('¿Seguro que quiere eliminar al profesional?');
-                if(confirmacion) {
-                    window.location.href= 'eliminarProfesional.php?id_profesionales=${idProfesional}';
+                if(!confirm('¿Seguro que quiere eliminar al profesional?')) {
+                    event.preventDefault();
                 }
             }
         </script>
@@ -62,7 +61,7 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <h1 class="card-title"><?= $profesional['nombre'] . ' ' . $profesional['primer_apellido'] . ' ' . $profesional['segundo_apellido']; ?></h1>
-                                        <img src='<?= $profesional['foto']; ?>' class="card-img-top" alt='<?= $profesional['nombre']; ?>'>
+                                        <img src='<?= $imagen = "img/profesionales/" . htmlspecialchars($profesional['foto']); ?>' class="card-img-top" alt='<?= $profesional['nombre']; ?>'>
                                         <div class="card-body">
                                             <p class="card-text"><span><?= $profesional['especialidad']; ?></span></p>
                                             <p class="card-text"><?= $profesional['descripcion']; ?></p>
