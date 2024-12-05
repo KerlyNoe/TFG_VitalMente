@@ -10,6 +10,9 @@
     $query = "SELECT * FROM servicios
               WHERE estado != 'eliminado'";
     $stmt = $conn->query($query);
+
+
+    /* Profesionales */
     $query2 = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.segundo_apellido, usuarios.email, usuarios.telefono, profesionales.foto, profesionales.especialidad, profesionales.descripcion  FROM usuarios
                INNER JOIN profesionales
                ON usuarios.id_usuarios = profesionales.id_usuario
@@ -42,7 +45,7 @@
                             <div class="col">
                                 <div class="card h-100">
                                     <h1 class="card-title text-center"><?= $servicios['nombre_servicio']; ?></h1>
-                                    <img src='<?= $servicios['imagen']; ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
+                                    <img src='<?=  $imagen = "img/servicios/" . htmlspecialchars($servicios['imagen']); ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
                                     <div class="card-body">
                                         <p class="card-text"><?= $servicios['descripcion']; ?></p>
                                     </div>
@@ -76,7 +79,7 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <h1 class="card-title"><?= $profesional['nombre'] . ' ' . $profesional['primer_apellido'] . ' ' . $profesional['segundo_apellido']; ?></h1>
-                                        <img src='<?= $profesional['foto']; ?>' class="card-img-top" alt='<?= $profesional['nombre']; ?>'>
+                                        <img src='<?= $imagen = "img/profesionales/" . htmlspecialchars($profesional['foto']); ?>' class="card-img-top" alt='<?= $profesional['nombre']; ?>'>
                                         <div class="card-body">
                                             <p class="card-text"><span><?= $profesional['especialidad']; ?></span></p>
                                             <p class="card-text"><?= $profesional['descripcion']; ?></p>
