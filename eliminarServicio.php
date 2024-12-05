@@ -42,7 +42,8 @@
         $stmt->close();
     } else {
         $mensaje = "El id de servicio no existe";
-        header("Location: eliminarProfesionales_todos.php?mensaje=" . urlencode($mensaje) . "&tipo=" . urlencode($tipo));
-        exit();
+        $tipo = "alert-danger";
     }
+    header("Location: eliminarServicios_todos.php?mensaje=" . urlencode($mensaje) . "&tipo=" . urlencode($tipo));
+    exit();
 ?>
