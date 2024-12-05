@@ -84,7 +84,7 @@
                                         ?>
                                         <div class="card">
                                             <h1 class="card-title"><?= $servicios['nombre_servicio']; ?></h1>
-                                            <img src='<?= $servicios['imagen']; ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
+                                            <img src='<?= $imagen = "img/servicios/" . htmlspecialchars($servicios['imagen']); ?>' class="card-img-top" alt='<?= $servicios['nombre_servicio']; ?>'>
                                                 <div class="card-body">
                                                     <p class="card-text"><?= $servicios['descripcion']; ?></p>
                                                 </div>
