@@ -1,8 +1,10 @@
 <?php
+    // Verifica si hay una sesión activa
     if(session_status() === PHP_SESSION_NONE){
         session_start();
     }
 
+    // Configuración de conexión con la base de datos
     include_once("config.php");
 
     include_once("header/navegadorSecundario.php");
@@ -12,7 +14,7 @@
     $stmt = $conn->query($query);
 
 
-    /* Profesionales */
+    // Profesionales
     $query2 = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.segundo_apellido, usuarios.email, usuarios.telefono, profesionales.foto, profesionales.especialidad, profesionales.descripcion  FROM usuarios
                INNER JOIN profesionales
                ON usuarios.id_usuarios = profesionales.id_usuario
@@ -30,7 +32,6 @@
         <link rel="stylesheet" href="css/estilosServicios.css">
     </head>
     <body>
-
         <!-- Servicios disponibles en la clínica  -->
         <div class="container-fluid">
             <h2 class="text-center">Servicios</h2>
@@ -51,7 +52,7 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><?= $servicios['asistencia']; ?></li>
-                                        <li class="list-group-item precio text-danger"><?= $servicios['precio']; ?> €</li>
+                                        <li class="list-group-item precio text-danger"><?= $servicios['precio']; ?> € P/S</li>
                                     </ul>
                                     <div class="card-footer boton">
                                         <a href="acceder.php" class="btn btn-success w-100">Reservar</a>
