@@ -1,4 +1,5 @@
 <?php
+    // Verifica si hay una sesión activa
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -20,23 +21,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Clínica VitalMente | Agregar Actividad</title>
-        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- CSS Personalizado -->
         <link rel="stylesheet" href="css/estilosActividad.css"> 
     </head>
     <body>
-        <div class="container mt-5">
-            <!-- Mostrar mensaje -->
-            <?php if(isset($_SESSION['mensaje'])): ?>
-                <div class="alert <?= $_SESSION['tipo']; ?> text-center" role="alert">
-                    <?= $_SESSION['mensaje']; ?>
-                </div>
-                <?php
-                    unset($_SESSION['mensaje'], $_SESSION['tipo']);
-                ?>
-            <?php endif; ?>
+        <!-- Mostrar mensaje -->
+        <?php if(isset($_SESSION['mensaje'])): ?>
+            <div class="alert <?= $_SESSION['tipo']; ?> text-center" role="alert">
+                <?= $_SESSION['mensaje']; ?>
+            </div>
+            <?php
+                unset($_SESSION['mensaje'], $_SESSION['tipo']);
+            ?>
+        <?php endif; ?>
 
+        <div class="container mt-5">
             <div class="form-container shadow-lg p-4 rounded">
                 <h1 class="text-center mb-4">Añadir Nueva Actividad</h1>
                 <form action="insertarActividades_calendario.php" method="POST">
@@ -66,6 +65,7 @@
                             <input type="time" name="hora_fin" id="hora_fin" class="form-control input-custom" required>
                         </div>
                     </div>
+
                     <!-- Campo oculto para enviar id_admin -->
                     <input type="hidden" name="id_admin" value="<?php echo $id_admin; ?>">
                     <div class="d-flex justify-content-between">
@@ -79,7 +79,7 @@
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            // Para que desaparezcan las notificaciones.
+            // Script para que desaparezcan las notificaciones.
             window.onload = function(){
                     const notificacion = document.getElementById('notificacion');
                     if(notificacion){
