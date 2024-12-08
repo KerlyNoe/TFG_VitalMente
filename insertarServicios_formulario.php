@@ -8,13 +8,7 @@
     include_once("config.php");
 
     // Verifica si el usuario está autenticado
-    if (!isset($_SESSION['tipo_usuario'])) {
-        header("Location: acceder.php");
-        exit();
-    }
-
-    // Solo permite acceso a administradores
-    if ($_SESSION['tipo_usuario'] !== 'administrador') {
+    if (!isset($_SESSION['tipo_usuario'] || $_SESSION['tipo_usuario'] !== 'administrador')) {
         header("Location: acceder.php");
         exit();
     }
