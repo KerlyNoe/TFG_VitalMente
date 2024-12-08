@@ -1,5 +1,6 @@
 <?php
-    if(session_status() === PHP_SESSION_NONE){
+    // Verifica si hay una sesión activa
+    if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
 
@@ -7,52 +8,47 @@
     include_once('config.php');
 
     // Verifica si el usuario está autenticado
-    if (!isset($_SESSION['tipo_usuario'])) {
+    if (!isset($_SESSION['tipo_usuario'] || $_SESSION['tipo_usuario'] !== 'normal')) {
         header("Location: acceder.php");
         exit();
     }
 
-    // Solo permite acceso a usuarios normales
-    if ($_SESSION['tipo_usuario'] !== 'normal') {
-        header("Location: acceder.php");
-        exit();
-    }
-
-    if(isset($_POST['profesionales'], $_POST['id_servicios'], $_POST['fecha'], $_POST['motivo'], $_POST['hora_inicio'], $_POST['hora_fin'])) {
-        $id_usuario = $_SESSION['id_usuarios']; // El id del usuario lo obtienes de la sesión
-        $id_profesional = $_POST['profesionales'];
-        $id_servicio = $_POST['id_servicios'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id_servicios = $_POST['id_servicios'];
         $fecha = $_POST['fecha'];
         $motivo = $_POST['motivo'];
-        $hora_inicio = $_POST['hora_inicio']; // Hora seleccionada en la tabla de horarios
-        $hora_fin = $_POST['hora_fin']; // Hora seleccionada en la tabla de horarios
+        $id_profesionales = $_POST['profesionales'];
+        $hora_inicio = $_POST['hora_inicio'];
+        $hora_fin = $_POST['hora_fin'];
+        $id_usuario = $_SESSION['id_usuarios'];
 
-        // Insertar datos en la tabla de citas
-        $query = "INSERT INTO citas (id_usuarios, id_profesionales, id_servicios, fecha, motivo, hora_inicio, hora_fin, estado)
-                VALUES (?, ?, ?, ?, ?, ?, ?, 'reservada')";
-
-        // Preparar la consulta
-        if ($stmt = $conn->prepare($query)) {
-            // Vincular los parámetros
-            $stmt->bind_param("iiissss", $id_usuario, $id_profesional, $id_servicio, $fecha, $motivo, $hora_inicio, $hora_fin);
-
-            // Ejecutar la consulta
-            if ($stmt->execute()) {
-                $_SESSION['mensaje'] =  "Cita realizada correctamete.";
-                $_SESSION['tipo'] =  "alert-success";
-            } else {
-                $_SESSION['mensaje'] =  "Error al realizar la cita.";
-                $_SESSION['tipo'] = "alert-danger";
-            }
-
-            // Cerrar la consulta
-            $stmt->close();
-        } else {
-            $_SESSION['mensaje'] = "Error en la base de datos.";
-            $_SESSION['tipo'] = "alert-danger";
+        // Validar que todos los campos están completos
+        if (empty($fecha) || empty($motivo) || empty($id_profesionales) || empty($hora_inicio) || empty($hora_fin)) {
+            $_SESSION['mensaje'] = 'Todos los campos son obligatorios.';
+            $_SESSION['tipo'] = 'alert-danger';
+            header('Location: insertarCita_formulario.php');
+            exit();
         }
+
+        // Limpiar campos
+        $fecha = htmlspecialchars($fecha);
+        $motivo = htmlspecialchars($motivo);
+        $hora_inicio = htmlspecialchars($hora_inicio);
+        $hora_fin = htmlspecialchars($hora_fin);
+
+        $query = "INSERT INTO citas (id_usuarios,id_profesionales, id_servicios, fecha, motivo, hora_inicio, hora_fin, estado)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, 'reservada')";
+        $stmt= $conn->prepare($query);
+        $stmt->bind_param('iiissss', $id_usuario, $id_profesionales, $id_servicios, $fecha, $motivo, $hora_inicio, $hora_fin);
+        if ($stmt->execute()) {
+            $_SESSION['mensaje'] = 'Cita reservada con éxito.';
+            $_SESSION['tipo'] = 'alert-success';
+        } else {
+            $_SESSION['mensaje'] = 'Error al reservar la cita: ' . $conn->error;
+            $_SESSION['tipo'] = 'alert-danger';
+        }
+        $stmt->close();
     }
-     // Redirige con el mensaje final
-     header("Location: insertarCita_formulario.php");
-     exit();
+    header('Location: insertarCita_formulario.php');
+    exit();
 ?>
