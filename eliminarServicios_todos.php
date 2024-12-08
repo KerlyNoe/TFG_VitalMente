@@ -1,18 +1,14 @@
 <?php
+    // Verifica si hay una sesión activa
     if(session_status() === PHP_SESSION_NONE){
         session_start();
     }
 
+    // Incluye la configuración de la base de datos
     include_once("config.php");
 
     // Verifica si el usuario está autenticado
-    if (!isset($_SESSION['tipo_usuario'])) {
-        header("Location: acceder.php");
-        exit();
-    }
-
-    // Solo permite acceso a administradores
-    if ($_SESSION['tipo_usuario'] !== 'administrador') {
+    if (!isset($_SESSION['tipo_usuario'] || $_SESSION['tipo_usuario'] !== 'administrador')) {
         header("Location: acceder.php");
         exit();
     }
@@ -50,7 +46,6 @@
             </div>
         <?php endif; ?>
 
-        <!-- Servicios disponibles en la clínica  -->
         <div class="container-fluid mt-5">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <?php
