@@ -15,10 +15,11 @@
     }else {
         include_once("header/navegadorPrimario.php");
     }
+    
     //Sentencia que recupera solo los servicios disponibles de la base de datos.
     $query = "SELECT * FROM servicios 
                WHERE estado != 'eliminado' AND nombre_servicio 
-               IN ('Ansiedad','Terapia familiar','Adicciones', 'Traumas', 'Maternidad')";
+               IN ('Ansiedad','Terapia familiar','Adicciones', 'Traumas')";
     $stmt = $conn->query($query);
 ?>
 <!DOCTYPE html>
@@ -112,5 +113,3 @@
     </body>
 </html>
 <?php include_once("footer/footer.php"); ?>
-
-             
