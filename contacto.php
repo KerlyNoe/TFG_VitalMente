@@ -35,13 +35,13 @@
                     <div class="col-lg-6 col-md-12 contacto-info">
                         <h1 class="text-info ms-5">Contáctanos a través de nuestras redes sociales:</h1>
                         <div class="contacto-icons">
-                            <a href="#" class="icono">
+                            <a href="www.facebook.com" class="icono">
                                 <img src="img/iconoFacebook.png" alt="Facebook">
                             </a>
-                            <a href="#" class="icono">
+                            <a href="www.instagram.com" class="icono">
                                 <img src="img/iconoInstagram.png" alt="Instagram">
                             </a>
-                            <a href="#" class="icono">
+                            <a href="www.youtube.com" class="icono">
                                 <img src="img/iconoYoutube.png" alt="YouTube">                                
                             </a>
                             <a href="tel:673925379" class="icono">
