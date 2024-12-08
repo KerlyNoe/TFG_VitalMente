@@ -1,0 +1,112 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.contacto {
+    padding: 40px 0;
+}
+
+.informacion {
+    margin: 0 20px;
+}
+
+.contacto-info h3 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Contenedor de iconos de contacto */
+.contacto-icons {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    justify-items: center;
+    margin-top: 150px;
+}
+
+/* Estilos comunes para los iconos */
+.icono {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.icono:hover {
+    background-color: #c4d5f3;
+    transform: scale(1.1);
+}
+
+.icono img {
+    width: 70px;
+    height: 70px;
+}
+
+/* Estilo del formulario */
+.formulario h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario .informacion {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario .form-control {
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.formulario .form-control:focus {
+    border-color: #c57d56;
+    box-shadow: 0 0 5px rgba(197, 125, 86, 0.5);
+}
+
+@media (max-width: 768px) {
+    .contacto-info {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .icono {
+        width: 60px;
+        height: 60px;
+    }
+
+    .icono img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .boton {
+        padding: 10px 20%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contacto-icons {
+        margin-top: 10px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .icono {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icono img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .btn {
+        padding: 10px 15%;
+    }
+}

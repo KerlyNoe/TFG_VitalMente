@@ -1,0 +1,124 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 20px;
+}
+
+/* Contenedor de la cabecera */
+.contenedor-cabecera {
+    width: 100%;
+    max-width: 750px; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Sección del usuario */
+.seccion-usuario {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Cabecera h2 */
+.seccion-usuario h2 {
+    font-size: 25px;
+    color: #333;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Contenido principal centrado */
+.contenido-central {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto; 
+    padding: 20px;
+}
+
+/* Estilo para las tarjetas de servicio */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.233);
+    margin: 10px 0;
+}
+
+/* Títulos de las tarjetas */
+.card-title {
+    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Precios en las tarjetas */
+.precio {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.seccion-cancelar {
+    max-width: 350px;
+    width: 100%;
+    margin: 10px auto;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.seccion-cancelar p {
+    margin-top: 30px; 
+    font-size: 1rem; 
+    color: rgb(150, 150, 150); 
+}
+
+/* Estilo de los botones */
+.seccion-cancelar button {
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+/* Títulos principales */
+h1 {
+    color: rgb(28, 28, 209);
+    letter-spacing: 2px;
+    margin-top: 10px;
+    font-size: 2rem;
+}
+
+/* Párrafos con advertencias */
+p {
+    color: red;
+}
+
+@media (max-width: 767px) {
+    .contenedor-cabecera {
+        max-width: 100%;
+    }
+
+    .row-cols-md-2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .seccion-cancelar {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .card-title {
+        font-size: 1rem; 
+    }
+
+    .seccion-usuario h2 {
+        font-size: 1.5rem; 
+    }
+
+    .contenido-central {
+        padding: 10px;
+        margin: 0 10px;
+    }
+}
