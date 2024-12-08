@@ -1,4 +1,5 @@
 <?php
+    // Verifica si hay una sesión activa
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -33,7 +34,6 @@
         }
 
         try {
-            // Consulta
             $query = "INSERT INTO actividades (titulo, descripcion, fecha, hora_inicio, hora_fin, id_admin) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
                 if (!$stmt) {
