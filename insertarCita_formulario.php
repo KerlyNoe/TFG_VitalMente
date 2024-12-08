@@ -1,5 +1,6 @@
 <?php
-     if(session_status() === PHP_SESSION_NONE){
+    // Verifica si hay una sesión activa
+    if(session_status() === PHP_SESSION_NONE){
         session_start();
     }
     
@@ -7,13 +8,7 @@
     include_once('config.php');
 
     // Verifica si el usuario está autenticado
-    if (!isset($_SESSION['tipo_usuario'])) {
-        header("Location: acceder.php");
-        exit();
-    }
-
-    // Solo permite acceso a administradores
-    if ($_SESSION['tipo_usuario'] !== 'normal') {
+    if (!isset($_SESSION['tipo_usuario'] || $_SESSION['tipo_usuario'] !== 'normal')) {
         header("Location: acceder.php");
         exit();
     }
@@ -23,22 +18,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Reservar Cita</title>
+        <title> Clínica VitalMente | Reservar Cita</title>
         <link rel="stylesheet" href="css/insertarCita.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- FullCalendar -->
         <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css" rel="stylesheet">
     </head>
     <body>
         <!-- Mostrar mensaje -->
         <?php if(isset($_SESSION['mensaje'])): ?>
-                <div class="alert <?= $_SESSION['tipo']; ?> text-center" role="alert">
-                    <?= $_SESSION['mensaje']; ?>
-                </div>
-                <?php
-                    unset($_SESSION['mensaje'], $_SESSION['tipo']);
-                ?>
+            <div class="alert <?= $_SESSION['tipo']; ?> text-center" role="alert">
+                <?= $_SESSION['mensaje']; ?>
+            </div>
+            <?php
+                unset($_SESSION['mensaje'], $_SESSION['tipo']);
+            ?>
         <?php endif; ?>
 
         <div class="container mt-4">
@@ -121,43 +115,48 @@
         <!-- FullCalendar -->
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                let idProfesional = '';
-                const calendario = new FullCalendar.Calendar(document.getElementById('calendario'), {
-                    initialView: 'dayGridMonth',
-                    locale: 'es',
-                    firstDay: 1,
-                    businessHours: { daysOfWeek: [1, 2, 3, 4, 5, 6] },
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,dayGridWeek,dayGridDay'
-                    },
-                    buttonText: { today: 'Hoy', month: 'Mes', week: 'Semana', day: 'Día' },
-                    dateClick: function (info) {
-                        const selectedDate = new Date(info.date);
-                        const today = new Date();
-                        today.setHours(0, 0, 0, 0);
+          document.addEventListener('DOMContentLoaded', function () {
+            const calendario = new FullCalendar.Calendar(document.getElementById('calendario'), {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                firstDay: 1, // Comienza en lunes.
+                businessHours: { daysOfWeek: [1, 2, 3, 4, 5, 6] }, 
+                headerToolbar: {
+                    left: 'prev,next today', 
+                    center: 'title',
+                    right: 'dayGridMonth' 
+                },
+                buttonText: { today: 'Hoy', month: 'Mes' },
+                validRange: function (nowDate) {
+                    return {
+                        start: nowDate.toISOString(), /
+                        end: null 
+                    };
+                },
+                dateClick: function (info) {
+                    const selectedDate = new Date(info.date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
 
-                        if (selectedDate.getDay() === 0) {
-                            alert('No puedes seleccionar un domingo.');
-                            return;
-                        }
-
-                        if (selectedDate >= today) {
-                            document.getElementById('fecha').value = info.dateStr;
-                        } else {
-                            alert('No puedes seleccionar una fecha anterior al día actual.');
-                        }
+                    if (selectedDate.getDay() === 0) {
+                        alert('No puedes seleccionar un domingo.');
+                        return;
                     }
-                });
 
-                calendario.render();
+                    if (selectedDate >= today) {
+                        document.getElementById('fecha').value = info.dateStr; 
+                    } else {
+                        alert('No puedes seleccionar una fecha anterior al día actual.');
+                    }
+                },
+            });
+
+            calendario.render();
 
                 // Cargar horarios disponibles
                 document.getElementById('verHorario').addEventListener('click', function () {
                     const fecha = document.getElementById('fecha').value;
-                    idProfesional = document.getElementById('profesionales').value;
+                    const idProfesional = document.getElementById('profesionales').value;
 
                     if (!fecha || !idProfesional) {
                         alert('Por favor selecciona una fecha y un profesional.');
@@ -173,17 +172,17 @@
                 });
 
                 // Seleccionar la hora desde la tabla de horarios
-                document.getElementById('tabla-horarios').addEventListener('click', function (event) {
-                    if (event.target && event.target.matches('button.seleccionar-hora')) {
-                        const horaInicio = event.target.dataset.horaInicio;
-                        const horaFin = event.target.dataset.horaFin;
+                 document.getElementById('tabla-horarios').addEventListener('click', function (event) {
+                    if (event.target && event.target.matches('input[type="radio"]')) {
+                        const horaInicio = event.target.getAttribute('data-horaInicio');
+                        const horaFin = event.target.getAttribute('data-horaFin');
 
-                        // Asignar los valores a los campos ocultos
-                        document.getElementById('hora_inicio').value = horaInicio;
-                        document.getElementById('hora_fin').value = horaFin;
-
-                        // Puedes cambiar el texto del botón o hacer cualquier otra acción
-                        alert('Hora seleccionada: ' + horaInicio + ' a ' + horaFin);
+                        if (horaInicio && horaFin) {
+                            document.getElementById('hora_inicio').value = horaInicio;
+                            document.getElementById('hora_fin').value = horaFin;
+                        } else {
+                            alert('Error: Los valores de hora no son válidos.');
+                        }
                     }
                 });
             });
