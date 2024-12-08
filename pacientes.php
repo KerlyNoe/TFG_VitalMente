@@ -1,21 +1,21 @@
 <?php 
-// Verifica si hay una sesión activa.
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+    // Verifica si hay una sesión activa
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Configuración de conexión con la base de datos.
-include_once("config.php");
+    // Configuración de conexión con la base de datos
+    include_once("config.php");
 
-if (!isset($_SESSION['tipo_usuario'])) {
-    header("Location: acceder.php");
-    exit();
-}
+    if (!isset($_SESSION['tipo_usuario'])) {
+        header("Location: acceder.php");
+        exit();
+    }
 
-$tipo_usuario = $_SESSION['tipo_usuario'];
-$id_usuario = $_SESSION['id_usuarios']; 
+    $tipo_usuario = $_SESSION['tipo_usuario'];
+    $id_usuario = $_SESSION['id_usuarios']; 
 
-include_once("header/navegadorPrimario.php");
+    include_once("header/navegadorPrimario.php");
 ?> 
 <!DOCTYPE html>
 <html lang="es">
@@ -28,8 +28,17 @@ include_once("header/navegadorPrimario.php");
         <link rel="stylesheet" href="css/estilosPacientes.css">
     </head>
     <body>
+        <!-- Mostrar mensaje -->
+        <?php if(isset($_SESSION['mensaje'])): ?>
+            <div class="alert <?= $_SESSION['tipo']; ?> text-center" role="alert">
+                <?= $_SESSION['mensaje']; ?>
+            </div>
+            <?php
+                unset($_SESSION['mensaje'], $_SESSION['tipo']);
+            ?>
+        <?php endif; ?>
+      
         <div class="contenedor">
-            <!-- Contenedor para usuario y servicios -->
             <div class="contenedor-cabecera">
                 <!-- Nombre del usuario -->
                 <?php 
@@ -39,7 +48,6 @@ include_once("header/navegadorPrimario.php");
                         $stmt->bind_param('i', $id_usuario);
                         $stmt->execute();
                         $usuario = $stmt->get_result();
-
                         if ($usuario && $usuario->num_rows > 0) {
                             $usuarios = $usuario->fetch_assoc();
                             echo '<div class="seccion-usuario text-center">';
@@ -75,7 +83,7 @@ include_once("header/navegadorPrimario.php");
                                         </ul>
                                         <div class="card-footer text-center">
                                             <form action="insertarCita_formulario.php" method="POST">
-                                                <input type="hidden" name="id_servicio" value="<?= htmlspecialchars($servicios['id_servicios']); ?>">
+                                                <input type="hidden" name="id_servicios" value="<?= htmlspecialchars($servicios['id_servicios']); ?>">
                                                 <button type="submit" class="btn btn-info w-100">Seleccionar</button>
                                             </form>
                                         </div>
@@ -91,9 +99,9 @@ include_once("header/navegadorPrimario.php");
 
                 <!-- Formulario para cancelar la cita -->
                 <?php
-                    $query = "SELECT id_citas, fecha FROM citas WHERE id_usuarios = ? AND estado = 'reservada'"; // Cambié 'reservadas' por 'reservada'
+                    $query = "SELECT id_citas, fecha FROM citas WHERE id_usuarios = ? AND estado = 'reservada'"; 
                     if ($stmt = $conn->prepare($query)) {
-                        $stmt->bind_param('i', $id_usuario); // $id_usuario debe ser el ID del usuario actual
+                        $stmt->bind_param('i', $id_usuario); 
                         $stmt->execute();
                         $citas = $stmt->get_result();
 
@@ -119,62 +127,76 @@ include_once("header/navegadorPrimario.php");
                         }
                         $stmt->close();
                     } else {
-                        echo "Error de consulta: " . htmlspecialchars($conn->error); // Escapar el error por seguridad
+                        echo "Error de consulta: " . htmlspecialchars($conn->error);
                     }
                 ?>
 
                 <!-- Resumen de la cita -->
-                <h1 class="text-center mb-4">Resumen</h1>
-                <?php
-                    $query = "SELECT 
-                            usuarios.nombre AS profesional,
-                            servicios.nombre_servicio AS servicio,
-                            citas.fecha,
-                            medicamentos_citas.nombre_medicamento AS medicamento,
-                            medicamentos_citas.dosis AS dosis,
-                            medicamentos_citas.instrucciones AS instrucciones,
-                            actividades_citas.descripcion AS actividad
-                        FROM citas
-                        LEFT JOIN profesionales
-                        ON citas.id_profesionales = profesionales.id_profesionales
-                        LEFT JOIN usuarios 
-                        ON profesionales.id_usuario = usuarios.id_usuarios
-                        LEFT JOIN servicios 
-                        ON citas.id_servicios = servicios.id_servicios
-                        LEFT JOIN medicamentos_citas
-                        ON medicamentos_citas.id_citas = citas.id_citas
-                        LEFT JOIN actividades_citas 
-                        ON actividades_citas.id_citas = citas.id_citas
-                        WHERE citas.id_usuarios = ?
-                        ORDER BY citas.fecha DESC";
+                <h1 class="text-center mb-4">Resumen de Citas</h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-info">
+                            <tr>
+                                <th>Nombre del Profesional</th>
+                                <th>Servicio</th>
+                                <th>Fecha</th>
+                                <th>Medicamento</th>
+                                <th>Dosis</th>
+                                <th>Instrucciones</th>
+                                <th>Actividad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $query = "SELECT 
+                                            usuarios.nombre AS profesional,
+                                            servicios.nombre_servicio AS servicio,
+                                            citas.fecha,
+                                            medicamentos_citas.nombre_medicamento AS medicamento,
+                                            medicamentos_citas.dosis AS dosis,
+                                            medicamentos_citas.instrucciones AS instrucciones,
+                                            actividades_citas.descripcion AS actividad
+                                        FROM citas
+                                        LEFT JOIN profesionales
+                                        ON citas.id_profesionales = profesionales.id_profesionales
+                                        LEFT JOIN usuarios 
+                                        ON profesionales.id_usuario = usuarios.id_usuarios
+                                        LEFT JOIN servicios 
+                                        ON citas.id_servicios = servicios.id_servicios
+                                        LEFT JOIN medicamentos_citas
+                                        ON medicamentos_citas.id_citas = citas.id_citas
+                                        LEFT JOIN actividades_citas 
+                                        ON actividades_citas.id_citas = citas.id_citas
+                                        WHERE citas.id_usuarios = ? AND citas.estado = 'reservada'
+                                        ORDER BY citas.fecha DESC";
+                                if ($stmt = $conn->prepare($query)) {
+                                    $stmt->bind_param('i', $id_usuario); 
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    if ($result && $result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<td>" . htmlspecialchars($row['profesional']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['servicio']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['fecha']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['medicamento'] ?? 'N/A') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['dosis'] ?? 'N/A') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['instrucciones'] ?? 'N/A') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['actividad'] ?? 'N/A') . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='7' class='text-center'>Tu resumen estará disponible cuando tengas citas programadas.</td></tr>";
+                                    }
 
-                    if ($stmt = $conn->prepare($query)) {
-                        $stmt->bind_param('i', $id_usuario); // ID del usuario actual
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-
-                        if ($result && $result->num_rows > 0) {
-                            // Mostrar resultados
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<div class='mb-3'>" . 
-                                    htmlspecialchars($row['profesional']) . " - " . 
-                                    htmlspecialchars($row['servicio']) . " - " . 
-                                    htmlspecialchars($row['fecha']) . " - " . 
-                                    htmlspecialchars($row['medicamento'] ?? 'N/A') . " - " .  
-                                    htmlspecialchars($row['dosis'] ?? 'N/A') . " - " . 
-                                    htmlspecialchars($row['instrucciones'] ?? 'N/A') . " - " .
-                                    htmlspecialchars($row['actividad'] ?? 'N/A') . 
-                                    "</div>";
-                            }
-                        } else {
-                            echo "<p>Tu resumen estará disponible cuando tengas una cita.</p>";
-                        }
-
-                        $stmt->close();
-                    } else {
-                        echo "Error en la consulta: " . htmlspecialchars($conn->error);
-                    }
-                ?>
+                                    $stmt->close();
+                                } else {
+                                    echo "<tr><td colspan='7' class='text-center'>Error en la consulta: " . htmlspecialchars($conn->error) . "</td></tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>
