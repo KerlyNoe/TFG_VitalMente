@@ -1,4 +1,5 @@
 <?php
+    // Verifica si hay una sesión activa
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -22,7 +23,6 @@
     $id_profesional = (int)$_GET['id_profesional'];
 
     try {
-        // Consulta los horarios disponibles del profesional para la fecha seleccionada
         $sql = "SELECT horarios.hora_inicio, horarios.hora_fin,
                     CASE
                         WHEN EXISTS (
@@ -47,18 +47,19 @@
                 $estado = $row['estado'] === 'reservada' ? 'No disponible' : 'Disponible';
                 $seleccion = $row['estado'] === 'reservada'
                     ? '<span class="text-muted">No disponible</span>'
-                    : "<input type='radio' name='hora_inicio' value='{$row['hora_inicio']}' required>";
-
+                    : "<input type='radio' name='hora_inicio' 
+                             data-horaInicio='{$row['hora_inicio']}' 
+                             data-horaFin='{$row['hora_fin']}' 
+                             value='{$row['hora_inicio']}' required>";
                 echo "<tr>
                         <td>{$row['hora_inicio']} - {$row['hora_fin']}</td>
-                        <td>$estado</td>
-                        <td>$seleccion</td>
-                    </tr>";
+                        <td>{$estado}</td>
+                        <td>{$seleccion}</td>
+                      </tr>";
             }
         } else {
             echo "<tr><td colspan='3' class='text-center'>No se encontraron horarios disponibles.</td></tr>";
         }
-
         $stmt->close();
     } catch (Exception $e) {
         echo "<tr><td colspan='3' class='text-center'>Error al obtener horarios: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
