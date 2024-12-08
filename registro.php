@@ -79,7 +79,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Script para Ocultar Notificaciones -->
         <script>
             window.onload = function() {
