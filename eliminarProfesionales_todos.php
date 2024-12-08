@@ -1,18 +1,14 @@
 <?php
+    // Verifica si hay una sesión activa
     if(session_status() === PHP_SESSION_NONE){
         session_start();
     }
 
+    // Incluye la configuración de la base de datos
     include_once("config.php");
 
     // Verifica si el usuario está autenticado
-    if (!isset($_SESSION['tipo_usuario'])) {
-        header("Location: acceder.php");
-        exit();
-    }
-
-    // Solo permite acceso a administradores
-    if ($_SESSION['tipo_usuario'] !== 'administrador') {
+    if (!isset($_SESSION['tipo_usuario'] || $_SESSION['tipo_usuario'] !== 'administrador')) {
         header("Location: acceder.php");
         exit();
     }
@@ -21,7 +17,7 @@
     $mensaje = isset($_GET['mensaje']) ? htmlspecialchars($_GET['mensaje']) : '';
     $tipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
 
-    $query = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.segundo_apellido, usuarios.email, usuarios.telefono, profesionales.foto, profesionales.especialidad, profesionales.descripcion  FROM usuarios
+    $query = "SELECT usuarios.nombre, usuarios.primer_apellido, usuarios.segundo_apellido, usuarios.email, usuarios.telefono,profesionales.id_profesionales, profesionales.foto, profesionales.especialidad, profesionales.descripcion  FROM usuarios
                INNER JOIN profesionales
                ON usuarios.id_usuarios = profesionales.id_usuario
                WHERE estado != 'baja'";
@@ -37,7 +33,7 @@
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/estilosServicios.css">
         <script>
-            function confirmarEliminacion (idProfesional) {
+            function confirmarEliminacion (event) {
                 if(!confirm('¿Seguro que quiere eliminar al profesional?')) {
                     event.preventDefault();
                 }
@@ -72,7 +68,8 @@
                                         </ul>
                                         <div class="card-footer">
                                             <form action="eliminarProfesional.php" method="POST">
-                                                <button type="submit" class="btn btn-danger w-100" onlick="confirmarEliminacion(<?= $profesional['id_profesionales']; ?>)">Eliminar Profesional</button>
+                                                <input type="hidden" name="id_profesionales" value="<?= $profesional['id_profesionales']; ?>">
+                                                <button type="submit" class="btn btn-danger w-100" onclick="confirmarEliminacion(event)">Eliminar Profesional</button>
                                             </form>
                                         </div>
                                     </div>
