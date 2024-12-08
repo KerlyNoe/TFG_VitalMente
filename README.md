@@ -7,3 +7,9 @@ Archivos login.php y registro_usuario.php añadidos al proyecto.
 
 18 de Noviembre:
 Código actualizado de todas las páginas entregadas anteriormente, añandiendo nuevas como actividades, admin, paciente, los navegadores ya corresponden con las páginas actuales, he igual los estilos están actualizados, no son fijos porque se irán modificando en las siguientes entregas. 
+
+05 de Diciembre:
+Aplicación 90% terminada, me quedán algunos ajustes de mensajes, estilos y 2 cosas del administrador. 
+
+08 de Diciembre:
+Aplicación 100% terminada. 
