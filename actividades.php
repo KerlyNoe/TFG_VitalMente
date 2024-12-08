@@ -1,15 +1,15 @@
 <?php
-    //Verificar si hay una sesión activa.
+    //Verificar si hay una sesión activa
     if(session_status() === PHP_SESSION_NONE){
         session_start();
     }
 
-    //Configuración de la conexion a la base de datos. 
+    //Configuración de la conexion a la base de datos
     include_once("config.php");
 
     $tipo_usuario = $_SESSION['tipo_usuario'] ?? null;
 
-    //Agregar el navegador.
+    //Agregar el navegador
     if($tipo_usuario === 'normal'){
         include_once("header/navegadorTres.php");
     }else {
@@ -25,13 +25,12 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/estilosActividadesCalendario.css">
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
     </head>
     <body>
-        <!-- Contenedor principal -->
         <div class="container">
             <h1 class="page-title text-center">Actividades de Clínica Vitalmente</h1>
-            
+
+            <!-- Calendario  -->
             <div class="calendar-container">
                 <div id="calendar"></div>
             </div>
@@ -59,6 +58,7 @@
 
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
         <!-- Script para el calendario -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -91,10 +91,10 @@
                     eventClick: function(info) {
                         // Mostrar los detalles en el modal
                         document.getElementById('activityTitle').innerText = info.event.title;
-                        document.getElementById('activityDate').innerText = info.event.start.toLocaleString(); // Puedes ajustar el formato según lo necesites
-                        document.getElementById('activityDescription').innerText = info.event.extendedProps.description; // Descripción que se pasa desde la base de datos
+                        document.getElementById('activityDate').innerText = info.event.start.toLocaleString(); 
+                        document.getElementById('activityDescription').innerText = info.event.extendedProps.description; 
                         
-                        // Mostrar el modal
+                        // Muestra el modal
                         var myModal = new bootstrap.Modal(document.getElementById('activityModal'));
                         myModal.show();
                     }
