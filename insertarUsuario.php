@@ -1,4 +1,5 @@
 <?php
+    // Configuración de conexión con la base de datos
     include_once('config.php');
 
     if (isset($_POST['nombre'], $_POST['primer_apellido'], $_POST['mail'], $_POST['password'], $_POST['telefono'])) {
